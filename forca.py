@@ -4,6 +4,9 @@ def jogar():
     imprime_mensagem_abertura()
 
     palavra_secreta = carrega_palavra_secreta()
+#    palavra_secreta = carrega_palavra_secreta()
+#    palavra_secreta = carrega_palavra_secreta(nome_arquivo="frutas.txt")
+#    palavra_secreta = carrega_palavra_secreta(nome_arquivo="nomes.txt")
 
     letras_acertadas = inicializa_letras_acertadas(palavra_secreta)
 
@@ -39,8 +42,10 @@ def imprime_mensagem_abertura():
     print("***Bem vindo ao jogo da Forca!***")
     print("*********************************")
 
-def carrega_palavra_secreta():
-    arquivo = open("palavras.txt", "r")
+# Torna o parâmetro opcional e por padrão usar o arq. palavras.txt qdo nenhum parâmetro é passado.
+# Qdo há um valor padrão definido isso torna o parâmetro opcional.
+def carrega_palavra_secreta(nome_arquivo="palavras.txt", primeira_linha_valida=0):
+    arquivo = open(nome_arquivo, "r")
     palavras = []
 
     for linha in arquivo:
@@ -49,7 +54,7 @@ def carrega_palavra_secreta():
 
     arquivo.close()
 
-    numero = random.randrange(0, len(palavras))
+    numero = random.randrange(primeira_linha_valida, len(palavras))
     palavra_secreta = palavras[numero].upper()
 
     return palavra_secreta
